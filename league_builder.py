@@ -34,6 +34,8 @@ teams = [
 
 
 def extract_lists(dict_reader_obj):
+    """Separates and creates two list base in if the player has experience or not"""
+
     for player in dict_reader_obj:
         if player['Soccer Experience'].upper() == 'YES':
             experience_players.append(player)
@@ -42,6 +44,8 @@ def extract_lists(dict_reader_obj):
 
 
 def distribute_experience():
+    """Evenly distribute players with experience among the teams"""
+
     amount_experience = len(experience_players) // len(teams)
     teams[0]['list_of_players'] = experience_players[:amount_experience]
     teams[1]['list_of_players'] = experience_players[amount_experience:(amount_experience * 2)]
@@ -49,6 +53,8 @@ def distribute_experience():
 
 
 def distribute_novice():
+    """Evenly distribute players with NO experience among the teams"""
+
     amount_novice = len(novice_players) // len(teams)
     teams[0]['list_of_players'].extend(novice_players[:amount_novice])
     teams[1]['list_of_players'].extend(novice_players[amount_novice:(amount_novice * 2)])
@@ -56,6 +62,8 @@ def distribute_novice():
 
 
 def export_list():
+    """Saves the new distribution into a txt file"""
+
     file = open("teams.txt", "w")
     for team in teams:
         file.write("\n\n")
